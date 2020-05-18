@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"edu.academic.JML.model","l":"Examples"},{"p":"edu.academic.JML.model","l":"Function"},{"p":"edu.academic.JML.model","l":"Iterative"},{"p":"edu.academic.JML.model","l":"Recursion"},{"p":"edu.academic.JML.model","l":"TailRecursion"},{"p":"edu.academic.JML.test","l":"Test_Implementations"}]
