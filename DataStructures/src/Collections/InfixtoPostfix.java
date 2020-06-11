@@ -21,28 +21,28 @@ public class InfixtoPostfix {
         Stack<Character> a = new Stack<Character>();
         Stack<Character> p = new Stack<Character>();
         Stack<Character> s = new Stack<Character>();
-
-        a.push(new Character(')'));
-        a.push(new Character(')'));
-        a.push(new Character(')'));
-        a.push(new Character('6'));
-        a.push(new Character('*'));
-        a.push(new Character('5'));
-        a.push(new Character('('));
-        a.push(new Character('*'));
-        a.push(new Character(')'));
-        a.push(new Character('4'));
-        a.push(new Character('+'));
-        a.push(new Character('3'));
-        a.push(new Character('('));
-        a.push(new Character('('));
-        a.push(new Character('+'));
-        a.push(new Character('2'));
-        a.push(new Character('('));
+      
+        a.push(')');
+        a.push(')');
+        a.push(')');
+        a.push('6');
+        a.push('*');
+        a.push('5');
+        a.push('(');
+        a.push('*');
+        a.push(')');
+        a.push('4');
+        a.push('+');
+        a.push('3');
+        a.push('(');
+        a.push('(');
+        a.push('+');
+        a.push('2');
+        a.push('(');
 
         while (!a.empty()) {
 
-            if (a.peek().equals(new Character('('))) {
+            if (a.peek().equals('(')) {
                 p.push(a.pop());
             } else {
 
@@ -56,9 +56,9 @@ public class InfixtoPostfix {
 
                 } else {
 
-                    if (a.peek().equals(new Character(')'))) {
+                    if (a.peek().equals(')')) {
 
-                        while (!p.peek().equals(new Character('('))) {
+                        while (!p.peek().equals('(')) {
                             s.push(p.pop());
                         }
 
