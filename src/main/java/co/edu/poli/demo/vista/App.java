@@ -21,7 +21,7 @@ public class App extends Application {
         AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/edu/poli/demo/vista/formulario.fxml"));
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("ESTUDIANTE (CRUD Y ARCHIVO)");
+        stage.setTitle("CRUD Y ARCHIVO (clase Estudiante)");
         stage.show();
     }
 
