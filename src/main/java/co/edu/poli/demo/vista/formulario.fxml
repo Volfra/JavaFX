@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.demo.controlador.FormularioControlador">
+   <children>
+      <Button fx:id="btt1" layoutX="76.0" layoutY="191.0" mnemonicParsing="false" onAction="#press1" prefHeight="25.0" prefWidth="137.0" text="Guardar" />
+      <TextField fx:id="txt1" layoutX="76.0" layoutY="45.0" prefHeight="25.0" prefWidth="185.0" promptText="Code" />
+      <TextField fx:id="txt2" layoutX="76.0" layoutY="81.0" prefHeight="25.0" prefWidth="185.0" promptText="Name" />
+      <RadioButton fx:id="rb1" layoutX="76.0" layoutY="141.0" mnemonicParsing="false" text="Hombre">
+         <toggleGroup>
+            <ToggleGroup fx:id="sexo" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rb2" layoutX="173.0" layoutY="141.0" mnemonicParsing="false" text="Mujer" toggleGroup="$sexo" />
+      <DatePicker fx:id="datePicker1" layoutX="312.0" layoutY="45.0" prefHeight="25.0" prefWidth="249.0" promptText="Fecha de Nacimiento" />
+      <ComboBox fx:id="cmb1" layoutX="312.0" layoutY="81.0" prefHeight="25.0" prefWidth="249.0" promptText="Programa" />
+      <Group fx:id="GroupChkBox" layoutX="310.0" layoutY="141.0">
+         <children>
+            <CheckBox fx:id="chkbox1" mnemonicParsing="false" text="Java" />
+            <CheckBox fx:id="chkbox3" layoutX="177.0" mnemonicParsing="false" text="Node" />
+            <CheckBox fx:id="chkbox2" layoutX="91.0" mnemonicParsing="false" text="Python" />
+         </children>
+      </Group>
+      <TableView fx:id="tblView" editable="true" layoutX="27.0" layoutY="244.0" onMousePressed="#displaySelected" prefHeight="142.0" prefWidth="546.0">
+        <columns>
+          <TableColumn fx:id="column1" prefWidth="56.0" text="Código" />
+          <TableColumn fx:id="column2" prefWidth="126.0" text="Nombre" />
+            <TableColumn fx:id="column3" prefWidth="43.0" text="Sexo" />
+            <TableColumn fx:id="column4" prefWidth="110.0" text="Fecha nacimiento" />
+            <TableColumn fx:id="column5" prefWidth="120.0" text="Programa" />
+            <TableColumn fx:id="column6" prefWidth="77.0" text="Habilidades" />
+        </columns>
+      </TableView>
+      <Button fx:id="btt2" layoutX="141.0" layoutY="399.0" mnemonicParsing="false" onAction="#press2" prefHeight="25.0" prefWidth="90.0" text="Serializar" />
+      <Button fx:id="btt3" layoutX="379.0" layoutY="399.0" mnemonicParsing="false" onAction="#press3" prefHeight="25.0" prefWidth="90.0" text="Deserializar" />
+      <Button fx:id="btt4" layoutX="244.0" layoutY="191.0" mnemonicParsing="false" onAction="#press4" prefHeight="25.0" prefWidth="137.0" text="Modificar" />
+      <Button fx:id="btt5" layoutX="407.0" layoutY="191.0" mnemonicParsing="false" onAction="#press5" prefHeight="25.0" prefWidth="137.0" text="Eliminar" />
+   </children>
+</AnchorPane>
