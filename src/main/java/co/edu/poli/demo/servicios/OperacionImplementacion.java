@@ -120,9 +120,9 @@ public class OperacionImplementacion implements Operacion {
             ois.close();
             fis.close();
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            System.err.println(ioe.getMessage());
         } catch (ClassNotFoundException c) {
-            c.printStackTrace();
+            System.err.println(c.getMessage());
         }
         return a;
     }
