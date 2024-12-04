@@ -150,98 +150,9 @@ public class FormularioControlador {
 		} catch (Exception e) {
 			a.setAlertType(AlertType.WARNING);
 			a.setContentText(e.getMessage());
-
-<<<<<<< HEAD
-        op.setEstudiantes(op.deserializar("", "binaryfile.bin"));
-        est.clear();
-        
-        for (Estudiante estudiante : op.readall()) {
-            if (estudiante!=null)
-                est.add(estudiante);
-        }
-
-        loadTable();
-
-    }
-
-    @FXML
-    void press4(ActionEvent event) {
-    
-        try{
-            Estudiante olde = tblView.getSelectionModel().getSelectedItem();
-
-            RadioButton rbaux = (RadioButton) sexo.getSelectedToggle();
-
-            List<String> listSkill = new ArrayList<String>();
-
-            for (Node cb: GroupChkBox.getChildren()){
-                CheckBox cbx = (CheckBox) cb;
-                if (cbx.isSelected())
-                    listSkill.add(cbx.getText());
-            }
-
-            Estudiante e = new Estudiante(
-                                    olde.getCodigo(), 
-                                    txt2.getText(),
-                                    rbaux.getText(), 
-                                    datePicker1.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                                    cmb1.getValue()!=null ? cmb1.getValue() : "N/A",
-                                    listSkill 
-                                    );
-
-            op.update(olde.getCodigo(), e);
-            est.set(est.indexOf(olde), e);
-
-            loadTable();
-
-        } catch (Exception e) {
-            Alert a = new Alert(AlertType.WARNING);
-            a.setContentText("Seleccionar un registro");
-            a.show();
-        }
-
-    }
-
-    @FXML
-    void press5(ActionEvent event) {
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-        try {
-            a.setContentText("¿Desea eliminar el registro?");
-            Optional<ButtonType> result = a.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                Estudiante e = tblView.getSelectionModel().getSelectedItem();
-                op.delete(e.getCodigo());
-                est.remove(e);
-                loadTable();
-            }
-        } catch (Exception e) {
-            a = new Alert(AlertType.WARNING);
-            a.setContentText("Seleccionar un registro");
-            a.show();
-        }
-
-    }
-
-    void loadTable() {
-
-        column1.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getCodigo()));
-        column2.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getNombres()));
-        column3.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getSexo()));
-        column4.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getFecNac()));
-        column5.setCellValueFactory(cell->new SimpleStringProperty(cell.getValue().getPrograma()));
-        column6.setCellValueFactory(cell->
-            new SimpleStringProperty(cell.getValue().getHabilidades().toString()!=null ? 
-                cell.getValue().getHabilidades().toString(): "-"));
-
-        tblView.setItems(est);
-
-    }
-=======
+			a.show();
+			clear();
 		}
->>>>>>> final/master
-
-		a.show();
-		clear();
 
 	}
 
@@ -307,21 +218,25 @@ public class FormularioControlador {
 
 	}
 
-	@FXML
-	void press5(ActionEvent event) {
-		Alert a = new Alert(AlertType.CONFIRMATION);
-		try {
-			Estudiante e = tblView.getSelectionModel().getSelectedItem();
-			est.remove(e);
-			a.setContentText("Delete: " + op.delete(e.getCodigo()));
-			loadTable();
-			clear();
-		} catch (Exception e) {
-			a.setContentText("Seleccionar un registro");
-		}
-		a.show();
+    @FXML
+    void press5(ActionEvent event) {
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        try {
+            a.setContentText("¿Desea eliminar el registro?");
+            Optional<ButtonType> result = a.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Estudiante e = tblView.getSelectionModel().getSelectedItem();
+                op.delete(e.getCodigo());
+                est.remove(e);
+                loadTable();
+            }
+        } catch (Exception e) {
+            a = new Alert(AlertType.WARNING);
+            a.setContentText("Seleccionar un registro");
+            a.show();
+        }
 
-	}
+    }
 
 	void loadTable() {
 
