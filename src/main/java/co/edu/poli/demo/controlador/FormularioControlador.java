@@ -1,5 +1,6 @@
 package co.edu.poli.demo.controlador;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,150 +30,128 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 
-
 public class FormularioControlador {
 
-    @FXML
-    private Button btt1;
+	@FXML
+	private Button btt1;
 
-    @FXML
-    private Button btt2;
+	@FXML
+	private Button btt2;
 
-    @FXML
-    private Button btt3;
+	@FXML
+	private Button btt3;
 
-    @FXML
-    private Button btt4;
+	@FXML
+	private Button btt4;
 
-    @FXML
-    private Button btt5;
+	@FXML
+	private Button btt5;
 
-    @FXML
-    private DatePicker datePicker1;
+	@FXML
+	private DatePicker datePicker1;
 
-    @FXML
-    private Label lbl1;
+	@FXML
+	private Label lbl1;
 
-    @FXML
-    private Label lbl2;
+	@FXML
+	private Label lbl2;
 
-    @FXML
-    private TextField txt1;
+	@FXML
+	private TextField txt1;
 
-    @FXML
-    private TextField txt2;
+	@FXML
+	private TextField txt2;
 
-    @FXML
-    private RadioButton rb1;
+	@FXML
+	private RadioButton rb1;
 
-    @FXML
-    private RadioButton rb2;
+	@FXML
+	private RadioButton rb2;
 
-    @FXML
-    private ToggleGroup sexo;
-    
-    @FXML
-    private ComboBox<String> cmb1;
+	@FXML
+	private ToggleGroup sexo;
 
-    @FXML
-    private CheckBox chkbox1;
+	@FXML
+	private ComboBox<String> cmb1;
 
-    @FXML
-    private CheckBox chkbox2;
+	@FXML
+	private CheckBox chkbox1;
 
-    @FXML
-    private CheckBox chkbox3;
+	@FXML
+	private CheckBox chkbox2;
 
-    @FXML
-    private Group GroupChkBox;
+	@FXML
+	private CheckBox chkbox3;
 
-    @FXML
-    private TableColumn<Estudiante, String> column1;
+	@FXML
+	private Group GroupChkBox;
 
-    @FXML
-    private TableColumn<Estudiante, String> column2;
+	@FXML
+	private TableColumn<Estudiante, String> column1;
 
-    @FXML
-    private TableColumn<Estudiante, String> column3;
+	@FXML
+	private TableColumn<Estudiante, String> column2;
 
-    @FXML
-    private TableColumn<Estudiante, String> column4;
+	@FXML
+	private TableColumn<Estudiante, String> column3;
 
-    @FXML
-    private TableColumn<Estudiante, String> column5;
+	@FXML
+	private TableColumn<Estudiante, String> column4;
 
-    @FXML
-    private TableColumn<Estudiante, String> column6;
+	@FXML
+	private TableColumn<Estudiante, String> column5;
 
-    @FXML
-    private TableView<Estudiante> tblView;
+	@FXML
+	private TableColumn<Estudiante, String> column6;
 
-    ObservableList<Estudiante> est;
+	@FXML
+	private TableView<Estudiante> tblView;
 
-    OperacionImplementacion op;
+	ObservableList<Estudiante> est;
 
-    @FXML
-    public void initialize() {
-        est = FXCollections.observableArrayList();
-    
-        op = new OperacionImplementacion();
+	OperacionImplementacion op;
 
-        ObservableList<String> list = FXCollections.observableArrayList
-                                    ("Ingeniería de Sistemas","Ingeniería de Software","Ingeniería de Telecomunicaciones");
-        cmb1.setItems(list);  
-    }    
-    
-    @FXML
-    void press1(ActionEvent event) {
+	@FXML
+	public void initialize() {
+		est = FXCollections.observableArrayList();
 
-        try { 
+		op = new OperacionImplementacion();
 
-            RadioButton rbaux = (RadioButton) sexo.getSelectedToggle();
-            
-            List<String> listSkill = new ArrayList<String>();
+		ObservableList<String> list = FXCollections.observableArrayList("Ingeniería de Sistemas",
+				"Ingeniería de Software", "Ingeniería de Telecomunicaciones");
+		cmb1.setItems(list);
+	}
 
-            for (Node cb: GroupChkBox.getChildren()){
-                CheckBox cbx = (CheckBox) cb;
-                if (cbx.isSelected())
-                    listSkill.add(cbx.getText());
-            }
+	@FXML
+	void press1(ActionEvent event) {
 
-            Estudiante e = new Estudiante(
-                                    txt1.getText(), 
-                                    txt2.getText(),
-                                    rbaux.getText(), 
-                                    datePicker1.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                                    cmb1.getValue()!=null ? cmb1.getValue() : "N/A",
-                                    listSkill 
-                                    );
+		Alert a = new Alert(AlertType.CONFIRMATION);
+		try {
 
-            op.create(e);
-            est.add(e);
+			RadioButton rbaux = (RadioButton) sexo.getSelectedToggle();
 
-            loadTable();
-    
-        } catch (Exception e) {
-            Alert a = new Alert(Alert.AlertType.WARNING);
-            a.setTitle("Mensaje");
-            a.setContentText(e.getMessage());
-            a.show();
+			List<String> listSkill = new ArrayList<String>();
 
-        }
-        
-    }
+			for (Node cb : GroupChkBox.getChildren()) {
+				CheckBox cbx = (CheckBox) cb;
+				if (cbx.isSelected())
+					listSkill.add(cbx.getText());
+			}
 
-    @FXML
-    void press2(ActionEvent event) {
+			Estudiante e = new Estudiante(txt1.getText(), txt2.getText(), rbaux.getText(),
+					datePicker1.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+					cmb1.getValue() != null ? cmb1.getValue() : "N/A", listSkill);
 
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setContentText(op.serializar(op.readall(), "", "binaryfile.bin"));
-        a.show();
+			est.add(e);
 
-    }
+			a.setContentText(op.create(e));
+			loadTable();
 
-    @FXML
-    void press3(ActionEvent event) {
+		} catch (Exception e) {
+			a.setAlertType(AlertType.WARNING);
+			a.setContentText(e.getMessage());
 
+<<<<<<< HEAD
         op.setEstudiantes(op.deserializar("", "binaryfile.bin"));
         est.clear();
         
@@ -257,40 +236,153 @@ public class FormularioControlador {
         tblView.setItems(est);
 
     }
+=======
+		}
+>>>>>>> final/master
 
-    @FXML
-    void displaySelected(MouseEvent event) {
+		a.show();
+		clear();
 
-        try {
+	}
 
-            Estudiante person = tblView.getSelectionModel().getSelectedItem();
+	@FXML
+	void press2(ActionEvent event) {
 
-            txt1.setText(person.getCodigo());
-            txt2.setText(person.getNombres());
-            sexo.selectToggle(person.getSexo().equals("Hombre") ? rb1 : rb2);
-            datePicker1.setValue(datePicker1.getConverter().fromString(person.getFecNac()));
-            cmb1.setValue(person.getPrograma());
+		Alert a = new Alert(AlertType.INFORMATION);
+		a.setContentText(op.serializar(op.readall(), "", "binaryfile.bin"));
+		a.show();
 
-            for (Node cb: GroupChkBox.getChildren()){
-                CheckBox cbx = (CheckBox) cb;
-                cbx.setSelected(false);
-            }
+	}
 
-            for (String habilidad : person.getHabilidades()) {
-                for (Node cb: GroupChkBox.getChildren()){
-                    CheckBox cbx = (CheckBox) cb;
-                    if (cbx.getText().equals(habilidad)) 
-                        cbx.setSelected(true);
-                }
-            }
+	@FXML
+	void press3(ActionEvent event) {
 
-        } catch (Exception e) {
-            Alert a = new Alert(AlertType.WARNING);
-            a.setContentText("Seleccionar un registro");
-            a.show();
-        }
+		Alert a = new Alert(AlertType.WARNING);
+		try {
+			op.setEstudiantes(op.deserializar("", "binaryfile.bin"));
+			est.clear();
 
-    }
+			for (Estudiante estudiante : op.readall()) {
+				if (estudiante != null)
+					est.add(estudiante);
+			}
 
+			loadTable();
+		} catch (Exception e) {
+			a.setContentText("Error open file "+e.getMessage());
+			a.show();
+		}
+
+	}
+
+	@FXML
+	void press4(ActionEvent event) {
+
+		Alert a = new Alert(AlertType.CONFIRMATION);
+		try {
+			Estudiante olde = tblView.getSelectionModel().getSelectedItem();
+
+			RadioButton rbaux = (RadioButton) sexo.getSelectedToggle();
+
+			List<String> listSkill = new ArrayList<String>();
+
+			for (Node cb : GroupChkBox.getChildren()) {
+				CheckBox cbx = (CheckBox) cb;
+				if (cbx.isSelected())
+					listSkill.add(cbx.getText());
+			}
+
+			Estudiante e = new Estudiante(olde.getCodigo(), txt2.getText(), rbaux.getText(),
+					datePicker1.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+					cmb1.getValue() != null ? cmb1.getValue() : "N/A", listSkill);
+
+			est.set(est.indexOf(olde), e);
+			a.setContentText(op.update(olde.getCodigo(), e));
+			loadTable();
+
+		} catch (Exception e) {
+			a.setContentText("Seleccionar un registro");
+		}
+		a.show();
+
+	}
+
+	@FXML
+	void press5(ActionEvent event) {
+		Alert a = new Alert(AlertType.CONFIRMATION);
+		try {
+			Estudiante e = tblView.getSelectionModel().getSelectedItem();
+			est.remove(e);
+			a.setContentText("Delete: " + op.delete(e.getCodigo()));
+			loadTable();
+			clear();
+		} catch (Exception e) {
+			a.setContentText("Seleccionar un registro");
+		}
+		a.show();
+
+	}
+
+	void loadTable() {
+
+		column1.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCodigo()));
+		column2.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getNombres()));
+		column3.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSexo()));
+		column4.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getFecNac()));
+		column5.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getPrograma()));
+		column6.setCellValueFactory(cell -> new SimpleStringProperty(
+				cell.getValue().getHabilidades().toString() != null ? cell.getValue().getHabilidades().toString()
+						: "-"));
+
+		tblView.setItems(est);
+
+	}
+
+	void clear() {
+		txt1.setText("");
+		txt2.setText("");
+		rb1.setSelected(true);
+		datePicker1.setValue(LocalDate.now());
+		cmb1.setValue("");
+
+		for (Node cb : GroupChkBox.getChildren()) {
+			CheckBox cbx = (CheckBox) cb;
+			cbx.setSelected(false);
+		}
+	}
+
+	@FXML
+	void displaySelected(MouseEvent event) {
+
+		try {
+
+			Estudiante person = tblView.getSelectionModel().getSelectedItem();
+
+			txt1.setText(person.getCodigo());
+			txt2.setText(person.getNombres());
+			sexo.selectToggle(person.getSexo().equals("Hombre") ? rb1 : rb2);
+			datePicker1.setValue(datePicker1.getConverter().fromString(person.getFecNac()));
+			cmb1.setValue(person.getPrograma());
+
+			for (Node cb : GroupChkBox.getChildren()) {
+				CheckBox cbx = (CheckBox) cb;
+				cbx.setSelected(false);
+			}
+
+			for (String habilidad : person.getHabilidades()) {
+				for (Node cb : GroupChkBox.getChildren()) {
+					CheckBox cbx = (CheckBox) cb;
+					if (cbx.getText().equals(habilidad))
+						cbx.setSelected(true);
+				}
+			}
+
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText("Seleccionar un registro");
+			a.show();
+		}
+
+	}
 
 }
