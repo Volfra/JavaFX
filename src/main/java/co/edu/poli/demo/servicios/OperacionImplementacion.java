@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 
 import co.edu.poli.demo.modelo.Estudiante;
 
-public class OperacionImplementacion implements Operacion {
+public class OperacionImplementacion implements Operacion, OperacionArchivo {
 
     private Estudiante[] Estudiantes;
 

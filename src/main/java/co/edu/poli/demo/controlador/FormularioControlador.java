@@ -3,6 +3,7 @@ package co.edu.poli.demo.controlador;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import co.edu.poli.demo.modelo.Estudiante;
 import co.edu.poli.demo.servicios.OperacionImplementacion;
@@ -15,6 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -223,14 +225,18 @@ public class FormularioControlador {
 
     @FXML
     void press5(ActionEvent event) {
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
         try {
-            Estudiante e = tblView.getSelectionModel().getSelectedItem();
-            op.delete(e.getCodigo());
-            est.remove(e);
-            loadTable();   
-
+            a.setContentText("¿Desea eliminar el registro?");
+            Optional<ButtonType> result = a.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Estudiante e = tblView.getSelectionModel().getSelectedItem();
+                op.delete(e.getCodigo());
+                est.remove(e);
+                loadTable();
+            }
         } catch (Exception e) {
-            Alert a = new Alert(AlertType.WARNING);
+            a = new Alert(AlertType.WARNING);
             a.setContentText("Seleccionar un registro");
             a.show();
         }

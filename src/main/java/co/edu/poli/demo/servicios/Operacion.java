@@ -14,8 +14,4 @@ public interface Operacion {
 
     public Estudiante delete(String cod);
     
-    public String serializar(Estudiante[] estudiantes, String path, String name);
-
-    public Estudiante[] deserializar(String path, String name);
-
 }
